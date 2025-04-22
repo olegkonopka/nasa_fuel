@@ -1,0 +1,76 @@
+<div class="p-6 space-y-6 max-w-xl mx-auto">
+  <h1 class="text-2xl font-bold">Fuel Calculator</h1>
+
+  <form phx-change="update_mass">
+    <label class="block">Spacecraft mass (kg):</label>
+    <input
+      type="text"
+      name="mass"
+      value={@mass}
+      placeholder="Enter mass"
+      class={
+        "input input-bordered w-full " <>
+          if @error, do: "input-error border-red-500", else: ""
+      }
+    />
+  </form>
+
+  <%= if @error do %>
+    <div class="text-red-500 mt-1 flex items-center gap-1">
+      <span>⚠️</span>
+      <span><%= @error %></span>
+    </div>
+  <% end %>
+
+  <form phx-change="change_step" phx-submit="add_step">
+    <div class="flex gap-2 items-end">
+      <div>
+        <label>Action:</label>
+        <select name="step[action]" class="select select-bordered">
+          <%= for action <- @actions do %>
+            <option value={action} selected={@new_action == action}><%= action %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <div>
+        <label>Planet:</label>
+        <select name="step[planet]" class="select select-bordered">
+          <%= for planet <- @planets do %>
+            <option value={planet} selected={@new_planet == planet}><%= planet %></option>
+          <% end %>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+      >
+        Add step
+      </button>
+    </div>
+  </form>
+
+  <div>
+    <h2 class="text-lg font-semibold">🛰 Flight path</h2>
+    <ul class="list-disc ml-5 space-y-1">
+      <%= for {step, i} <- Enum.with_index(@steps) do %>
+        <li>
+          <%= elem(step, 0) %> - <%= elem(step, 1) %>
+          <button phx-click="remove_step" phx-value-index={i} class="btn btn-xs btn-error ml-2">
+            Remove
+          </button>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div>
+    <h2 class="text-lg font-semibold">🛢 Fuel Required:</h2>
+    <%= if @fuel != nil do %>
+      <p class="text-green-600 font-bold text-xl"><%= @fuel %> kg</p>
+    <% else %>
+      <p class="text-gray-500">Enter mass and add steps to see the result.</p>
+    <% end %>
+  </div>
+</div>
