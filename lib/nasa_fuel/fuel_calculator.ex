@@ -35,35 +35,3 @@ defmodule NasaFuel.FuelCalculator do
   defp gravity("Moon"), do: 1.62
   defp gravity("Mars"), do: 3.711
 end
-
-
-
-
-# mass = 28801
-
-# steps = [
-#   {"launch", "Earth"},
-#   {"land", "Moon"},
-#   {"launch", "Moon"},
-#   {"land", "Earth"}
-# ]
-
-# fuel = NasaFuel.FuelCalculator.total_fuel(mass, steps)
-
-
-
-# mass = 14606
-
-# steps = [
-#   {"launch", "Earth"},
-#   {"land", "Mars"},
-#   {"launch", "Mars"},
-#   {"land", "Earth"}
-# ]
-
-# fuel = NasaFuel.FuelCalculator.total_fuel(mass, steps)
-
-
-# mass = 75432
-# steps = [{"launch", "Earth"}, {"land", "Moon"}, {"launch", "Moon"}, {"land", "Mars"}, {"launch", "Mars"}, {"land", "Earth"}]
-# fuel = NasaFuel.FuelCalculator.total_fuel(mass, steps)

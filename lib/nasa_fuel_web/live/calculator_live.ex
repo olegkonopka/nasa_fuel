@@ -18,8 +18,6 @@ defmodule NasaFuelWeb.Live.CalculatorLive do
         actions: @actions,
         planets: @planets
       )
-    IO.inspect(@planets, label: "🚀 planets at mount")
-    IO.inspect(socket.assigns)
     {:ok, socket}
   end
 
